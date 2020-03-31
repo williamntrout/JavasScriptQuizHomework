@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
 </head>
-<body>
-    
+
+
+<body background="qmarks2.jpg">
+    <nav class="navbar bg-dark" style="height: 6rem; border-bottom: 8px solid #28a745;">
+        <div class="container">
+            <div class="navbar-header text-white-50">
+                <h1>Quiz Game</h1>
+            </div>
+        </div>
+    </nav>
+    <div class= "container-fluid">
+        <element class="row">
+            <element class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <element class="card" style="margin-top: 5rem; margin-left: 3rem; border: success;">
+                    <element class="card-body">
+                        <h5 class="card-title">Question:</h5>
+                        <p class="card-text" id="question">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi iure repellat vero maxime, eum ullam soluta nesciunt, error magnam quo eos, quisquam consectetur! Impedit in similique sequi, aut quos aperiam?</p>
+                        <button type="button" id="choiceA" class="btn btn-primary btn-lg btn-block">answer</button>
+                        <button type="button" id="choiceB" class="btn btn-primary btn-lg btn-block">answer</button>
+                        <button type="button" id="choiceC" class="btn btn-primary btn-lg btn-block">answer</button>
+                        <button type="button" id="choiceD" class="btn btn-primary btn-lg btn-block">answer</button>
+                    </element>
+                </element>
+            </element>
+            <element class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <element class="card" style="margin-top: 5rem; margin-left: 3rem; margin-right: 3rem; border: success;">
+                    <element class="card-body">
+                        <h5 class="card-title">Leaderboard</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item active" id="first-place">First</li>
+                            <li class="list-group-item" id="second-place">Second</li>
+                            <li class="list-group-item" id="third-place">Third</li>
+                            <li class="list-group-item" id="fourth-place">Fourth</li>
+                            <li class="list-group-item" id="fith-place">Fifth</li>
+                        </ul>
+                    </element>
+                </element>
+            </element>
+        </element>
+    </div>
+    <!-- <footer id="sticky-footer" class="py-4 bg-dark text-white-50" style= "
+    right: 0;bottom:0;left:0;
+    border-top: 8px solid #28a745;">
+        <div class="container text-center">
+            <small>Copyright &copy; William N Trout </small>
+        </div>
+    </footer> -->
 </body>
 </html>
