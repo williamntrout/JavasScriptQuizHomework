@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script defer src="script.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-   
 </head>
 
 
@@ -18,19 +16,20 @@
             <div class="navbar-header text-white-50">
                 <h1>Quiz Game</h1>
             </div>
+            <div>
+                <button type="button" id="startButton" class="btn btn-primary btn-lg">Start Quiz</button>
+            </div>
         </div>
     </nav>
-    <div class= "container-fluid">
+    <div class="container-fluid">
         <element class="row">
             <element class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                 <element class="card" style="margin-top: 5rem; margin-left: 3rem; border: success;">
-                    <element class="card-body" id="quiz">
+                    <element class="card-body" id="quiz-content">
                         <h5 class="card-title">Question:</h5>
-                        <p class="card-text" id="questionField"></p>
-                        <button type="button" id="choiceA" onclick= "checkAnswer ('A')" class="btn btn-primary btn-lg btn-block">answer a</button>
-                        <button type="button" id="choiceB" onclick= "checkAnswer ('B')" class="btn btn-primary btn-lg btn-block">answer b</button>
-                        <button type="button" id="choiceC" onclick= "checkAnswer ('C')" class="btn btn-primary btn-lg btn-block">answer c</button>
-                        <button type="button" id="choiceD" onclick= "checkAnswer ('D')" class="btn btn-primary btn-lg btn-block">answer d</button>
+                        <p class="card-text" id="question"></p>
+                        <div id="answer-buttons" class="btn-block">
+                        </div>
                     </element>
                 </element>
             </element>
@@ -50,12 +49,7 @@
             </element>
         </element>
     </div>
-    <!-- <footer id="sticky-footer" class="py-4 bg-dark text-white-50" style= "
-    right: 0;bottom:0;left:0;
-    border-top: 8px solid #28a745;">
-        <div class="container text-center">
-            <small>Copyright &copy; William N Trout </small>
-        </div>
-    </footer> -->
+    <script defer src="script.js"></script>
 </body>
+
 </html>
