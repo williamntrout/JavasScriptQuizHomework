@@ -61,7 +61,7 @@ var questions = [
 
 // Press the start button
 
-startButton.addEventListener("click", startQuiz);
+startButton.addEventListener("click", startQuiz, startTimer);
 console.log(startButton)
 
 // function to tell the quiz to start
@@ -84,6 +84,7 @@ function selectAnswer(event) {
 
     if (current_index > questions.length) {
         /// THe gamse is over. Crush heir dreams
+        // go to game over screen and enter score.
     } else {
         displayQuestion(questions)
     }
@@ -95,10 +96,11 @@ function selectAnswer(event) {
 
 function displayQuestion(question_array) {
     questionField.innerText = question_array[current_index].question
+    // endscreen trigger
     question_array[current_index].answers.forEach(answer => {
         var button = document.createElement('button')
         button.innerText = answer.text
-        button.classList.add('btn-block')
+        button.classList.add('button')
         if (answer.correct) {
             button.dataset.correct = answer.correct
 
@@ -112,34 +114,35 @@ function displayQuestion(question_array) {
 
 }
 
-var countdown;
-var timerDisplay = document.querySelector('display-time-left');
 
 
 // timer elemement
-function timer(seconds) {
-    const now = date.now();
-    const then = now + seconds * 1000;
-    showTimeLeft(seconds);
-    countdown = setInterval(() => {
-        const secondsLeft = Math.round((then - Date.now()) / 1000);
-        // make it stop at zero so it doesnt go negative time...
-        if (secondsLeft <= 0) {
-            clearInterval(countdown);
-            return;
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        // if (timer <= 0) {
+        //     clearInterval(interval);
+        // }
+
+        if (--timer <= 0) {
+            timer = duration;
         }
-        // display time remaining
-        showTimeLeft(secondsLeft);
     }, 1000);
 }
 
-function showTimeLeft(seconds) {
-    var minutes = Math.floor(seconds / 60);
-    var secondsRemaining = seconds % 60;
-    const display = '${minutes};{seconds}';
-    timerDisplay.textContent = display;
-    console.log({ minutes, secondsRemaining });
-}
+window.onclick = function () {
+    var oneMinute = 60 * 1,
+        display = document.querySelector('#time');
+    startTimer(oneMinute, display);
+};
 
 // check for correct answers and keep score
 
