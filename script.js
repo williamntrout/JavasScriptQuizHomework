@@ -57,10 +57,7 @@ var questions = [
     },
 ];
 
-// tell the page to start the quiz
 
-// var startQuiz = alert('Are you ready to start our Quiz?'); id= 'start';
-//     console.log(startQuiz);
 
 // Press the start button
 
@@ -75,7 +72,6 @@ function startQuiz() {
 
 function selectAnswer(event) {
     // Verify one that is clicked gets the true statement within the array
-
     var text_received = event.target.innerText;
     //Go through the questions array at the current index - this is the current question
     questions[current_index].answers.forEach(answer => {
@@ -115,6 +111,36 @@ function displayQuestion(question_array) {
     })
 
 }
+
+var countdown;
+var timerDisplay = document.querySelector('display-time-left');
+
+
+// timer elemement
+function timer(seconds) {
+    const now = date.now();
+    const then = now + seconds * 1000;
+    showTimeLeft(seconds);
+    countdown = setInterval(() => {
+        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        // make it stop at zero so it doesnt go negative time...
+        if (secondsLeft <= 0) {
+            clearInterval(countdown);
+            return;
+        }
+        // display time remaining
+        showTimeLeft(secondsLeft);
+    }, 1000);
+}
+
+function showTimeLeft(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var secondsRemaining = seconds % 60;
+    const display = '${minutes};{seconds}';
+    timerDisplay.textContent = display;
+    console.log({ minutes, secondsRemaining });
+}
+
 // check for correct answers and keep score
 
 //  time each session and keep track of time
