@@ -12,7 +12,6 @@
     </style>
 </head>
 
-
 <body background="qmarks2.jpg">
     <nav class="navbar bg-dark" style="height: 6rem; border-bottom: 8px solid #28a745;">
         <div class="container">
@@ -20,64 +19,82 @@
                 <h1>Quiz Game</h1>
             </div>
 
-            <div class="display">
-                <div>Quiz ends in <span id="time">01:00</span>!</div>
+            <div class="display text-white-50" style="font-size: x-large;">
+                <div>Quiz ends in <span id="time">60</span> seconds!</div>
             </div>
         </div>
     </nav>
-
     <div class="container-fluid">
-        <div id="intro-screen">
-            <element class="row">
-                <element class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                    <element class="card" style="margin-top: 5rem; margin-left: 3rem; border: success;">
-                        <element class="card-body" id="quiz-instructions">
-                            <h3 clas="border-bottom">JavaScriptQuizChallenge</h3>
-                            <hr>
-                            <h5>Rules Of The Game:</h5>
-                            <ul>
-                                <li>5 multiple-choice questions.</li>
-                                <li>60 second time limit.</li>
-                                <li>Correct answers add 5 seconds.</li>
-                                <li>Wrong answers subtract 5 seconds</li>
-                                <li>Lowest time remaing wins.</li>
-                            </ul>
-                            <button type="button" id="startButton" class="btn-lg">Start Quiz
-                            </button>
-                        </element>
+        <element id="intro" class="row">
+            <element class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <element class="card" style="margin-top: 5rem; margin-left: 3rem; border: 8px solid #28a745;">
+                    <element class="card-body" id="quiz-instructions">
+                        <h3 class="card-title">JavaScriptQuizChallenge</h3>
+                        <hr>
+                        <h5>Rules Of The Game:</h5>
+                        <ul>
+                            <li>5 multiple-choice questions.</li>
+                            <li>60 second time limit.</li>
+                            <li>Wrong answers subtract 5 seconds</li>
+                            <li>Lowest time remaing wins.</li>
+                        </ul>
+                        <button type="button" id="startButton" class="btn btn-secondary btn-lg">Start Quiz
+                        </button>
                     </element>
                 </element>
             </element>
-        </div>
-        <div id="question-box">
-            <element class="row">
-                <element class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                    <element class="card" style="margin-top: 5rem; margin-left: 3rem; border: success;">
-                        <element class="card-body" id="quiz-content">
-                            <h5 class="card-title">Question:</h5>
-                            <p class="card-text" id="question"></p>
-                            <div id="answer-buttons" class="button">
-                            </div>
-                        </element>
-                    </element>
-                </element>
-                <element class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                    <element class="card"
-                        style="margin-top: 5rem; margin-left: 3rem; margin-right: 3rem; border: success;">
-                        <element class="card-body">
-                            <h5 class="card-title">Leaderboard</h5>
-                            <ul class="list-group">
-                                <li class="list-group-item active" id="first-place">First</li>
-                                <li class="list-group-item" id="second-place">Second</li>
-                                <li class="list-group-item" id="third-place">Third</li>
-                                <li class="list-group-item" id="fourth-place">Fourth</li>
-                                <li class="list-group-item" id="fith-place">Fifth</li>
-                            </ul>
-                        </element>
+        </element>
+        <element id="quizQuestions" class="row d-none">
+            <element class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <element class="card" style="margin-top: 5rem; margin-left: 3rem; border: 8px solid #28a745;">
+                    <element id="quiz" class="card-body">
+                        <h5 class="card-title">Question:</h5>
+                        <hr>
+                        <p id="question" class="card-text" Style="font-size: x-large;"></p>
+                        <div id="choices" class="button">
+                            <button id="A" type="button" class="choice btn btn-secondary btn-lg btn-block"
+                                onclick="checkAnswer(A)"></button>
+                            <button id="B" type="button" class="choice btn btn-secondary btn-lg btn-block"
+                                onclick="checkAnswer(B)"></button>
+                            <button id="C" type="button" class="choice btn btn-secondary btn-lg btn-block"
+                                onclick="checkAnswer(C)"></button>
+                            <button id="D" type="button" class="choice btn btn-secondary btn-lg btn-block"
+                                onclick="checkAnswer(D)"></button>
+                        </div>
                     </element>
                 </element>
             </element>
-        </div>
+        </element>
+        <element id="gameOver" class="row d-none">
+            <element class="col-lg-8 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                <element class="card" style="margin-top: 5rem; margin-left: 3rem; border: 8px solid #28a745;">
+                    <element class="card-body" id="game-over-screen">
+                        <h1 class="card-title">GAME OVER</h1>
+                        <hr>
+                        <h3 class="card-text" id="score-message">Score: <span id="endScore"></span></h3>
+                        <p>Initials: <input type="text" id="initials" max="3" /></p>
+                        <button type="button" class="btn btn-secondary btn-lg" id="submitButton">Submit</button>
+                    </element>
+                </element>
+            </element>
+        </element>
+        <element id="leaderboard" class="row d-none">
+            <element class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <element class="card" style="margin-top: 5rem; margin-left: 3rem; border: 8px solid #28a745;">
+                    <element class="card-body">
+                        <h5 class="card-title">Leaderboard</h5>
+                        <hr>
+                        <ul class="list-group">
+                            <li class="list-group-item" id="first-place">First</li>
+                            <li class="list-group-item" id="second-place">Second</li>
+                            <li class="list-group-item" id="third-place">Third</li>
+                            <li class="list-group-item" id="fourth-place">Fourth</li>
+                            <li class="list-group-item" id="fith-place">Fifth</li>
+                        </ul>
+                    </element>
+                </element>
+            </element>
+        </element>
     </div>
     <script defer src="script.js"></script>
 </body>

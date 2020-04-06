@@ -1,153 +1,164 @@
-var startButton = document.getElementById('startButton')
+// declarations
+var leaderBoard = document.getElementById('leaderboard');
+var submitButton = document.getElementById('submitButton');
+var time = document.getElementById('time');
+var gameOver = document.getElementById('gameOver');
+var quizQuestions = document.getElementById('quizQuestions');
 var quiz = document.getElementById("quiz");
-var questionField = document.getElementById("question");
-var quizContentElement = document.getElementById('quiz-content')
-var answerButtonsElement = document.getElementById("answer-buttons");
-var current_index = 0;
+var question = document.getElementById("question");
+var choiceA = document.getElementById("A");
+var choiceB = document.getElementById("B");
+var choiceC = document.getElementById("C");
+var choiceD = document.getElementById('D');
 
-var questions = [
-    {
-        question: "What is question 1?",
-        answers: [
-            { text: 'A: An answer', correct: false },
-            { text: 'B: An answer', correct: false },
-            { text: 'C: Correct C', correct: true },
-            { text: 'D: An answer', correct: false },
-        ]
-    },
+// questions
 
+let questions = [
     {
-        question: "What is question 2?",
-        answers: [
-            { text: 'A: An answer', correct: false },
-            { text: 'B: An answer', correct: false },
-            { text: 'C: Correct C', correct: true },
-            { text: 'D: An answer', correct: false },
-        ]
+        question: "How do you write an IF statment in JavaScript?",
+        choiceA: "if (==5)",
+        choiceB: "if i==5 then",
+        choiceC: "if i don't figure this out i am gonna lose it!",
+        choiceD: "if i = 5",
+        correct: "A"
     },
-
     {
-        question: "What is question 3?",
-        answers: [
-            { text: 'A: An answer', correct: false },
-            { text: 'B: An answer', correct: false },
-            { text: 'C: Correct C', correct: true },
-            { text: 'D: An answer', correct: false },
-        ]
+        question: "How do you create a function in JavaScript?",
+        choiceA: "FunctionManFunction",
+        choiceB: "functionFunction",
+        choiceC: "funciton MyFunction()",
+        choiceD: "Function Function What's My Function",
+        correct: "C"
     },
-
     {
-        question: "What is question 4?",
-        answers: [
-            { text: 'A: An answer', correct: false },
-            { text: 'B: An answer', correct: false },
-            { text: 'C: Correct C', correct: true },
-            { text: 'D: An answer', correct: false },
-        ]
+        question: "How do you had a comment to JavaScript?",
+        choiceA: "<-THis is a Comment->",
+        choiceB: "//THis is a Comment",
+        choiceC: "**This is Coment**",
+        choiceD: "<*(This is a Comment)*>",
+        correct: "B"
     },
-
     {
-        question: "What is question 5?",
-        answers: [
-            { text: 'A: An answer', correct: false },
-            { text: 'B: An answer', correct: false },
-            { text: 'C: Correct C', correct: true },
-            { text: 'D: An answer', correct: false },
-        ]
+        question: "How does a FOR loop start?",
+        choiceA: "fir (i = 0; i<=5; i++)",
+        choiceB: "four (i = 0; i=5: i++)",
+        choiceC: "4 (i=0; i<=5; i++)",
+        choiceD: "for (i = 0; i <= 5; i++)",
+        correct: "d"
     },
+    {
+        question: "Where did Byron send his family for Vacation?",
+        choiceA: "Disney World",
+        choiceB: "Lego Land",
+        choiceC: "Disney Land",
+        choiceD: "Sea World",
+        correct: "A"
+    }
 ];
 
+// variables
+
+var lastQuestion = questions.length - 1;
+var runningQuestion = 0;
+var currentTime = 59;
+var interval;
 
 
-// Press the start button
-
-startButton.addEventListener("click", startQuiz, startTimer);
-console.log(startButton)
-
-// function to tell the quiz to start
+// start quiz
 
 function startQuiz() {
     displayQuestion(questions);
-};
+}
 
-function selectAnswer(event) {
-    // Verify one that is clicked gets the true statement within the array
-    var text_received = event.target.innerText;
-    //Go through the questions array at the current index - this is the current question
-    questions[current_index].answers.forEach(answer => {
-        if (answer.text === text_received && answer.correct) {
-            console.log("Nailed it")
-        }
-    })
-    answerButtonsElement.innerHTML = ""
-    current_index += 1
+// render a question
 
-    if (current_index > questions.length) {
-        /// THe gamse is over. Crush heir dreams
-        // go to game over screen and enter score.
-    } else {
-        displayQuestion(questions)
+function displayQuestion() {
+    var q = questions[runningQuestion];
+
+    question.innerHTML = "<p>" + q.question + "</p>";
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+    choiceD.innerHTML = q.choiceD;
+}
+
+// render progress
+
+function cycleQuestions() {
+
+    for (var qIndex = 0; qIndex <= lastQuestion; qIndex++) {
     }
-    // Increase the current_index by one
-    // If correct, increase correct
-    // Rerun display questions.
+
 }
-// function to tell the questions to display the questions and answers in the form on index.html.
 
-function displayQuestion(question_array) {
-    questionField.innerText = question_array[current_index].question
-    // endscreen trigger
-    question_array[current_index].answers.forEach(answer => {
-        var button = document.createElement('button')
-        button.innerText = answer.text
-        button.classList.add('button')
-        if (answer.correct) {
-            button.dataset.correct = answer.correct
+// checkAnwer
 
-        } else {
+function checkAnswer(answer) {
+    if (answer == questions[runningQuestion].correct) {
+        // answer is correct
+        answerIsCorrect();
+    } else {
+        // answer is wrong
+        answerIsWrong();
+    }
+    count = 0;
+    if (runningQuestion < lastQuestion) {
+        runningQuestion++;
+        displayQuestion();
+    } else {
+        quizQuestions.classList.add('d-none');
+        gameOver.classList.remove('d-none');
+        // end the quiz and show the score
+        clearInterval(startTimer);
+        // calculate time and show time 
+    }
+}
+// answer is correct
+function answerIsCorrect() {
+}
 
+// answer is Wrong
+function answerIsWrong() {
+}
+
+// timer function 
+function startTimer() {
+    interval = setInterval(function () {
+        time.innerHTML = currentTime--;
+
+        if (currentTime === 0) {
+            clearInterval(interval)
         }
-
-        button.addEventListener('click', selectAnswer)
-        answerButtonsElement.appendChild(button)
-    })
-
+    }, 1000)
 }
 
+// display score
+
+// function displayScore () {
+//     i dont know where to go with this!!!!!
+// }
+
+// function addScore () {
+//     i dont know where to to gith this???!!??
+// if (highscore ) {
+//     if (score > highscore) {
+//         localStorage.setItem("highscore", score);
+//     }
+// }
+// else {
+//     localStorage.setItem("highscore", score);
+// }
+// }
 
 
-// timer elemement
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
+startButton.addEventListener("click", function () {
+    intro.classList.add('d-none');
+    quizQuestions.classList.remove('d-none');
+    startTimer();
+    startQuiz();
+});
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
-
-        // if (timer <= 0) {
-        //     clearInterval(interval);
-        // }
-
-        if (--timer <= 0) {
-            timer = duration;
-        }
-    }, 1000);
-}
-
-window.onclick = function () {
-    var oneMinute = 60 * 1,
-        display = document.querySelector('#time');
-    startTimer(oneMinute, display);
-};
-
-// check for correct answers and keep score
-
-//  time each session and keep track of time
-
-// create high score list number of correct questions / time. low score wins.
-
-// display scores in leader board  
+submitButton.addEventListener('click', function () {
+    gameOver.classList.add('d-none');
+    leaderBoard.classList.remove('d-none');
+});
